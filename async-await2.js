@@ -1,54 +1,49 @@
 const http = require('https')
 const url = 'https://jsonplaceholder.typicode.com/todos'
 
-const funcionario1 = () => {
+const buscaTarefa1 = () => {
     return new Promise((resolve, reject) => {
-        func1 = buscaFunc(1)
         setTimeout(() => {
-            console.log('buscando funcionario 1...')                        
-            resolve(func1)
+            console.log('buscando tarefa 1...')                        
+            resolve(buscaTarefa(1))
         }, 1000);
     })
 }
 
-const funcionario2 = () => {
+const buscaTarefa2 = () => {
     return new Promise((resolve, reject) => {
-        func2 = buscaFunc(2)
         setTimeout(() => {
-            console.log('buscando funcionario 2...')
-            resolve(func2)
+            console.log('buscando tarefa 2...')
+            resolve(buscaTarefa(2))
         }, 1000);
     })
 }
 
-const funcionario3 = () => {
+const buscaTarefa3 = () => {
     return new Promise((resolve, reject) => {
-        func3 = buscaFunc(3)
         setTimeout(() => {
-            console.log('buscando funcionario 3...')
-            resolve(func3)
+            console.log('buscando tarefa 3...')
+            resolve(buscaTarefa(3))
         }, 1000);
     })
 }
 
-const buscaFunc = (cod) => {
-    let func = ''
+const buscaTarefa = (cod) => {
+    let tarefa = ''
     http.get(`${url}/${cod}`, res => {
         res.on('data', dados => {
-            this.func = JSON.parse(dados)
+            this.tarefa = JSON.parse(dados)
         })    
     })
-    return this.func
+    return this.tarefa
 }
 
-const listaFuncionarios = async () => {
-    let funcs = []
-
-    funcs.push(await funcionario1())
-    funcs.push(await funcionario2())
-    funcs.push(await funcionario3())
-
-    return funcs
+const listaTarefas = async () => {
+    let tarefas = []
+    tarefas.push(await buscaTarefa1())
+    tarefas.push(await buscaTarefa2())
+    tarefas.push(await buscaTarefa3())
+    return tarefas
 }
 
-const obterLista = listaFuncionarios().then(funcs => console.log(funcs))
+const obterLista = listaTarefas().then(tarefas => console.log(tarefas))
